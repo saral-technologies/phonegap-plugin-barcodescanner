@@ -115,7 +115,7 @@
 - (id)initWithProcessor:(CDVbcsProcessor*)processor alternateOverlay:(NSString *)alternateXib;
 - (void)startCapturing;
 - (UIView*)buildOverlayView;
-- (UIImage*)buildReticleImage;
+//- (UIImage*)buildReticleImage;
 - (void)shutterButtonPressed;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)flipCameraButtonPressed:(id)sender;
@@ -1073,7 +1073,7 @@ parentViewController:(UIViewController*)parentViewController
 
     [overlayView addSubview: toolbar];
 
-    UIImage* reticleImage = [self buildReticleImage];
+    /*UIImage* reticleImage = [self buildReticleImage];
     UIView* reticleView = [[[UIImageView alloc] initWithImage:reticleImage] autorelease];
     CGFloat minAxis = MIN(rootViewHeight, rootViewWidth);
 
@@ -1095,7 +1095,7 @@ parentViewController:(UIViewController*)parentViewController
         | UIViewAutoresizingFlexibleBottomMargin)
     ;
 
-    [overlayView addSubview: reticleView];
+    [overlayView addSubview: reticleView];*/
 
     return overlayView;
 }
@@ -1110,40 +1110,40 @@ parentViewController:(UIViewController*)parentViewController
 //-------------------------------------------------------------------------
 // builds the green box and red line
 //-------------------------------------------------------------------------
-- (UIImage*)buildReticleImage {
-    UIImage* result;
-    UIGraphicsBeginImageContext(CGSizeMake(RETICLE_SIZE, RETICLE_SIZE));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
-    if (self.processor.is1D) {
-        UIColor* color = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:RETICLE_ALPHA];
-        CGContextSetStrokeColorWithColor(context, color.CGColor);
-        CGContextSetLineWidth(context, RETICLE_WIDTH);
-        CGContextBeginPath(context);
-        CGFloat lineOffset = (CGFloat) (RETICLE_OFFSET+(0.5*RETICLE_WIDTH));
-        CGContextMoveToPoint(context, lineOffset, RETICLE_SIZE/2);
-        CGContextAddLineToPoint(context, RETICLE_SIZE-lineOffset, (CGFloat) (0.5*RETICLE_SIZE));
-        CGContextStrokePath(context);
-    }
-
-    if (self.processor.is2D) {
-        UIColor* color = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:RETICLE_ALPHA];
-        CGContextSetStrokeColorWithColor(context, color.CGColor);
-        CGContextSetLineWidth(context, RETICLE_WIDTH);
-        CGContextStrokeRect(context,
-                            CGRectMake(
-                                       RETICLE_OFFSET,
-                                       RETICLE_OFFSET,
-                                       RETICLE_SIZE-2*RETICLE_OFFSET,
-                                       RETICLE_SIZE-2*RETICLE_OFFSET
-                                       )
-                            );
-    }
-
-    result = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return result;
-}
+//- (UIImage*)buildReticleImage {
+//    UIImage* result;
+//    UIGraphicsBeginImageContext(CGSizeMake(RETICLE_SIZE, RETICLE_SIZE));
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//
+//    if (self.processor.is1D) {
+//        UIColor* color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0];
+//        CGContextSetStrokeColorWithColor(context, color.CGColor);
+//        CGContextSetLineWidth(context, RETICLE_WIDTH);
+//        CGContextBeginPath(context);
+//        CGFloat lineOffset = (CGFloat) (RETICLE_OFFSET+(0.5*RETICLE_WIDTH));
+//        CGContextMoveToPoint(context, lineOffset, RETICLE_SIZE/2);
+//        CGContextAddLineToPoint(context, RETICLE_SIZE-lineOffset, (CGFloat) (0.5*RETICLE_SIZE));
+//        CGContextStrokePath(context);
+//    }
+//
+//    if (self.processor.is2D) {
+//        UIColor* color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0];
+//        CGContextSetStrokeColorWithColor(context, color.CGColor);
+//        CGContextSetLineWidth(context, RETICLE_WIDTH);
+//        CGContextStrokeRect(context,
+//                            CGRectMake(
+//                                       RETICLE_OFFSET,
+//                                       RETICLE_OFFSET,
+//                                       RETICLE_SIZE-2*RETICLE_OFFSET,
+//                                       RETICLE_SIZE-2*RETICLE_OFFSET
+//                                       )
+//                            );
+//    }
+//
+//    result = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return result;
+//}
 
 #pragma mark CDVBarcodeScannerOrientationDelegate
 
