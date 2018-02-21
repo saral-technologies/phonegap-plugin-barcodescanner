@@ -29,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.content.pm.PackageManager;
 import android.view.Surface;
+import android.widget.Button;
 
 
 import java.util.ArrayList;
@@ -87,6 +88,8 @@ implements SurfaceHolder.Callback {
 
     // Activity Lifecycle ----------------------------------------------
 
+    Button cancelButton;
+
     @Override
     public void onCreate (Bundle savedInstanceState) {
 
@@ -104,9 +107,19 @@ implements SurfaceHolder.Callback {
                     CAMERA_PERMISSION_REQUEST);
         }
         super.onCreate(savedInstanceState);
-
-
+        cancelButton = (Button) findViewById(getResourceId("id/cancelButton"));
+        addListenerOnButton();
     }
+
+    private void addListenerOnButton() {
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            });
+     }
+
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
