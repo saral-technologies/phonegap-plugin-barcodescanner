@@ -107,8 +107,6 @@ implements SurfaceHolder.Callback {
                     CAMERA_PERMISSION_REQUEST);
         }
         super.onCreate(savedInstanceState);
-        cancelButton = (Button) findViewById(getResourceId("id/cancelButton"));
-        addListenerOnButton();
     }
 
     private void addListenerOnButton() {
@@ -173,7 +171,8 @@ implements SurfaceHolder.Callback {
             TextView view_textInstructions = (TextView) findViewById(getResourceId("id/csZbarScannerInstructions"));
             view_textTitle.setText(textTitle);
             view_textInstructions.setText(textInstructions);
-
+            cancelButton = (Button) findViewById(getResourceId("id/cancelButton"));
+            addListenerOnButton();
             // Draw/hide the sight
             if(!drawSight) {
                 findViewById(getResourceId("id/csZbarScannerSight")).setVisibility(View.INVISIBLE);
